@@ -1,0 +1,67 @@
+{% extends 'base_auth.html' %}
+
+{% block auth_content %}
+
+<div class="card-body">
+
+    <div class="pt-4 pb-2">
+      <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
+      <p class="text-center small">Enter your personal details to create account</p>
+    </div>
+    <hr/>
+    {% include "components/action_message.html" %}
+    <br />
+    
+
+    <form method="post" class="row g-3 needs-validation" novalidate>
+      {% csrf_token %}
+      <div class="col-12">
+        <div class="row">
+          <div class="col-6">
+            <label for="first_name" class="form-label">First Name</label>
+            <input type="text" name="first_name" class="form-control" id="first_name" placeholder="First Name" required>
+            <div class="invalid-feedback">Please, enter your first Name!</div>
+          </div>
+          <div class="col-6">
+            <label for="last_name" class="form-label">Last Name</label>
+            <input type="text" name="last_name" class="form-control" id="last_name" placeholder="First Name" required>
+            <div class="invalid-feedback">Please, enter your last name!</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-12">
+        <label for="yourEmail" class="form-label">Email</label>
+        <input type="email" name="email" class="form-control" id="yourEmail" placeholder="email@address.com" required>
+        <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+      </div>
+
+      <div class="col-12">
+        <label for="password1" class="form-label">Password</label>
+        <input type="password" name="password1" class="form-control" id="password1" placeholder="***************" required>
+        <div class="invalid-feedback">Please enter your password!</div>
+      </div>
+
+      <div class="col-12">
+        <label for="password2" class="form-label">Confirm Password</label>
+        <input type="password" name="password2" class="form-control" id="password2" placeholder="***************" required>
+        <div class="invalid-feedback">Please confirm your password!</div>
+      </div>
+
+      <div class="col-12">
+        <div class="form-check">
+          <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
+          <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="#">terms and conditions</a></label>
+          <div class="invalid-feedback">You must agree before submitting.</div>
+        </div>
+      </div>
+      <div class="col-12">
+        <button class="btn btn-primary w-100" type="submit">Create Account</button>
+      </div>
+      <div class="col-12">
+        <p class="small mb-0">Already have an account? <a href="{% url 'login' %}">Log in</a></p>
+      </div>
+    </form>
+</div>
+
+{% endblock auth_content %}

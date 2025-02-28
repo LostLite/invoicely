@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="">
+    <h2 class="text-center">{{form_title}}</h2>
+    <hr />
+    <br/>  
+    <form method="post">
+        {% csrf_token %}
+        {% include "components/action_message.html" %}
+        <div class="row">
+            <div class="col col-md-6">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Client</label>
+                    <select id="client" name="client" class="form-select">
+                        <option>Select Client</option>
+                        {% for client in clients %}
+                            <option 
+                            value="{{client.id}}"  
+                            {% if client.id == form.client.value %}
+                                selected
+                            {% endif %}
+                            >{{client.name}}</option>
+                        {% endfor %}
+                    </select>
+                    {% if form.errors and form.client.errors is not None %}
+                        <span style="color: red;">{{form.client.errors}}</span>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" value="{{form.title.value|default_if_none:''}}">
+                    {% if form.errors and form.title.errors is not None %}
+                        <span style="color: red;">{{form.title.errors}}</span>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Invoice Description</label>
+                    <textarea rows="5" class="form-control" id="description" name="description" >{{form.description.value|default_if_none:''}}</textarea>
+                </div>
+            </div>
+            <div class="col col-md-6 border-start">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Discount Value</label>
+                    <input type="text" class="form-control" id="discount_value" name="discount_value" value="{{form.discount_value.value|default_if_none:''}}">
+                    {% if form.errors and form.discount_value.errors is not None %}
+                        <span style="color: red;">{{form.discount_value.errors}}</span>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Discount Type</label>
+                    <select id="discount_type" name="discount_type" class="form-select">
+                        <option>Select Discount Type</option>
+                        {% for discount_type in discount_types %}
+                            <option 
+                            value="{{discount_type.id}}"  
+                            {% if discount_type.id == form.discount_type.value %}
+                                selected
+                            {% endif %}
+                            >{{discount_type.code}}</option>
+                        {% endfor %}
+                    </select>
+                    {% if form.errors and form.discount_type.errors is not None %}
+                        <span style="color: red;">{{form.discount_type.errors}}</span>
+                    {% endif %}
+                </div>
+                
+                <div class="mb-3">
+                    <label for="name" class="form-label">VAT (%)</label>
+                    <input type="text" class="form-control" id="vat_value" name="vat_value" value="{{form.vat_value.value|default_if_none:''}}">
+                    {% if form.errors and form.vat_value.errors is not None %}
+                        <span style="color: red;">{{form.vat_value.errors}}</span>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">Currency</label>
+                    <select id="currency" name="currency" class="form-select">
+                        <option>Select Currency</option>
+                        {% for currency in currencies %}
+                            <option 
+                            value="{{currency.id}}"  
+                            {% if currency.id == form.currency.value %}
+                                selected
+                            {% endif %}
+                            >{{currency.name}}</option>
+                        {% endfor %}
+                    </select>
+                    {% if form.errors and form.currency.errors is not None %}
+                        <span style="color: red;">{{form.currency.errors}}</span>
+                    {% endif %}
+                </div>
+                
+                <a href="{% url 'invoice_list' %}" class="btn btn-primary">Cancel</a>
+                <button type="submit" class="btn btn-warning">{{form_title}}</button>
+            </div>
+        </div>
+        
+    </form>
+</div>
+
+{% endblock %}

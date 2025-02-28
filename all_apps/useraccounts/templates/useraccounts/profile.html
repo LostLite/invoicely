@@ -1,0 +1,31 @@
+{% extends "useraccounts/profile-template.html" %}
+
+
+{% block profilecontent %}
+
+<div class="tab-pane fade show active profile-overview" id="profile-overview">
+                  
+  <h5 class="card-title">Profile Details</h5>
+
+  <div class="row">
+    <div class="col-lg-3 col-md-4 label ">Full Name</div>
+    <div class="col-lg-9 col-md-8">{{request.user.get_full_name}}</div>
+  </div>
+
+  <div class="row">
+      <div class="col-lg-3 col-md-4 label">Email</div>
+      <div class="col-lg-9 col-md-8">{{request.user.get_email_address}}</div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-3 col-md-4 label">Phone</div>
+    <div class="col-lg-9 col-md-8">{{request.user.get_phone_number}}</div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-3 col-md-4 label">Account Type</div>
+    <div class="col-lg-9 col-md-8">{{request.user.get_account_type}}</div>
+  </div>
+
+</div>
+{% endblock %}

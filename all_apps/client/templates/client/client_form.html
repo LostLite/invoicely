@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="mt-5 pt-5 border-top">
+    <div class="col col-md-6">
+        <h2 class="text-center">{{form_title}}</h2>
+        <form method="post">
+            {% csrf_token %}
+            {% include "components/action_message.html" %}
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{form.name.value|default_if_none:''}}">
+                {% if form.errors and form.name.errors is not None %}
+                    <span style="color: red;">{{form.name.errors}}</span>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" value="{{form.email.value|default_if_none:''}}">
+                {% if form.errors and form.email.errors is not None %}
+                    <span style="color: red;">{{form.email.errors}}</span>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="text" class="form-control" id="phone" name="phone" value="{{form.phone.value|default_if_none:''}}">
+                {% if form.errors and form.phone.errors is not None %}
+                    <span style="color: red;">{{form.phone.errors}}</span>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                <label for="website" class="form-label">Website</label>
+                <input type="url" class="form-control" id="website_url" name="website_url" value="{{form.website_url.value|default_if_none:''}}">
+                {% if form.errors and form.website_url.errors is not None %}
+                    <span style="color: red;">{{form.website_url.errors}}</span>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea rows="5" class="form-control" id="description" name="description" value="{{form.description.value|default_if_none:''}}" ></textarea>
+            </div>
+            <button type="submit" class="btn btn-warning">{{form_title}}</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+<ul class="nav nav-tabs nav-tabs-bordered">
+
+    <li class="nav-item">
+      <a class="nav-link {{profile_active}}" href="{% url 'user-profile' %}" >Overview</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link {{edit_profile_active}}" href="{% url 'user-profile-edit' %}" >Edit Profile</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link {{change_password_active}}" href="{% url 'user-profile-change-password' %}" >Change Password</a>
+    </li>
+
+</ul>

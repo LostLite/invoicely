@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+
+{% block content %}
+
+<div class="container">
+    {% include "components/action_message.html" %}
+
+    <div class="row mb-3">
+        <div class="d-flex justify-content-between">
+            <a href="{% url 'invoice_list' %}" class="btn btn-primary">Back to Invoice List</a>
+            <form method="post" action="{% url 'invoice_send' invoice.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success pull-right">Finalize & Send Invoice</a>
+            </form>
+            
+        </div>
+    </div>
+
+    <!-- Invoice Details -->
+    <div class="row">
+        <div class="col-md-12">
+            <p class="fs-3">Invoice Details</p>      
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Client</th>
+                        <th scope="col">Invoice Title</th>
+                        <th scope="col">Invoice Description</th>
+                        <th scope="col">Discount</th>
+                        <th scope="col">VAT(%)</th>
+                        <th scope="col">Total Invoice Cost</th>
+                        <th scope="col">Invoice Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ invoice.client }}</td>
+                        <td>{{ invoice.title }}</td>
+                        <td>{{ invoice.description }}</td>
+                        <td>{{ invoice.currency.symbol}}{{ invoice.discount_value|intcomma }} - {{ invoice.discount_type.code }}</td>
+                        <td>{{ invoice.vat_value }} %</td>
+                        <td>{{ invoice.currency.symbol}}{{ invoice.get_total|intcomma }}</td>
+                        <td>{{ invoice.invoice_status }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr />
+
+    
+    <!-- Invoice Items -->
+    <div class="row mt-5">
+        {% include "invoice/components/_invoice_items_form.html" %}
+        {% include "invoice/components/_invoice_items.html" %}
+    </div>
+</div>
+
+
+
+{% endblock %}

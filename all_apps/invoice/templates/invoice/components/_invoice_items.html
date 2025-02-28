@@ -1,0 +1,53 @@
+{% load humanize %}
+
+<!--Invoice Items Table-->
+<div class="col-md-7">
+    <p class="fs-3">Invoice Items</p>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Item</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+                <th scope="col">Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in invoice.items.all %}
+            <tr>
+                <td>{{ item.item }}</td>
+                <td>{{ item.quantity|intcomma }}</td>
+                <td>{{ invoice.currency.symbol}}{{ item.price|intcomma }}</td>
+                <td>{{ invoice.currency.symbol}}{{ item.get_total|intcomma }}</td>
+                <td>
+                    <form method="post" action="{% url 'invoice_item_delete' item.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">X</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="3"><strong>Sub-Total</strong></td>
+                <td>{{ invoice.currency.symbol}}{{ invoice.get_sub_total|intcomma }}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3">Discount ({{invoice.discount_value}} - {{invoice.discount_type.code}})</td>
+                <td>{{ invoice.currency.symbol}}{{ invoice.get_discount|intcomma }}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3">VAT ({{invoice.vat_value}}%)</td>
+                <td>{{ invoice.currency.symbol}}{{ invoice.get_vat|intcomma }}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3"><strong>Invoice Total</strong></td>
+                <td>{{ invoice.currency.symbol}}{{ invoice.get_total|intcomma }}</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

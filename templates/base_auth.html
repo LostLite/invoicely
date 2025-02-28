@@ -1,0 +1,23 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>QuickInvoice</title>
+    
+    {% include "components/layout/style_links.html" %}
+
+  </head>
+  <body>
+    <main class="container">
+      <div class="col-md-6 mx-auto">
+        {% block auth_content %}
+        {% endblock %}
+      </div>
+    </main>
+
+    {% include "components/footer.html" %}
+    {% include "components/layout/scripts.html" %}
+  </body>
+</html>

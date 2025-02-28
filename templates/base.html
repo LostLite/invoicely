@@ -1,0 +1,24 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>QuickInvoice</title>
+    
+    {% include "components/layout/style_links.html" %}
+
+  </head>
+  <body>
+    
+    {% include "components/navbar.html" %}
+
+    <main class="container py-5">
+      {% block content %}
+      {% endblock %}
+    </main>
+
+    {% include "components/footer.html" %}
+    {% include "components/layout/scripts.html" %}
+  </body>
+</html>

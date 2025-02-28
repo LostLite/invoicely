@@ -1,0 +1,40 @@
+<!--Invoice Items Form-->
+
+<div class="col-md-5">
+    <form method="post"  action="{% url 'invoice_item_create' %}">
+        {% csrf_token %}
+        <p class="fs-3">Add Invoice Items</p>
+        <input type="hidden" name="invoice" value="{{invoice.id}}">
+        <div class="mb-3">
+            <label for="item" class="form-label">Item Name</label>
+            <input type="text" class="form-control" id="item" name="item">
+            {% if form.errors and form.item.errors is not None %}
+                <span style="color: red;">{{form.item.errors}}</span>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Item Description</label>
+            <textarea rows="3" type="text" class="form-control" id="description" name="description"></textarea>
+            {% if form.errors and form.description.errors is not None %}
+                <span style="color: red;">{{form.description.errors}}</span>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <label for="quantity" class="form-label">Quantity</label>
+            <input type="number" class="form-control" id="quantity" name="quantity">
+            {% if form.errors and form.quantity.errors is not None %}
+                <span style="color: red;">{{form.quantity.errors}}</span>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Unit Price</label>
+            <input type="number" class="form-control" id="price" name="price">
+            {% if form.errors and form.price.errors is not None %}
+                <span style="color: red;">{{form.price.errors}}</span>
+            {% endif %}
+        </div>
+        <button type="submit" class="btn btn-primary">Add Item</button>
+    </form>
+</div>
