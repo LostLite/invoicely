@@ -1,4 +1,4 @@
-### Invoicely
+# Invoicely
 
 This is an invoice generating app developed using Django 5.1 with both Function-Based Views and Class-Based Views. The following packages were used to in the project:
 
